@@ -1,0 +1,111 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+model StudyGroup {
+  id           String              @id @default(cuid())
+  code         String              @unique
+  createdAt    DateTime            @default(now())
+  updatedAt    DateTime            @updatedAt
+
+  participants Participant[]
+  sessions     AssessmentSession[]
+}
+
+model Participant {
+  id         String              @id @default(cuid())
+  lastName   String
+  firstName  String
+  middleName String              @default("")
+  groupId    String
+  createdAt  DateTime            @default(now())
+  updatedAt  DateTime            @updatedAt
+
+  group      StudyGroup          @relation(fields: [groupId], references: [id])
+  sessions   AssessmentSession[]
+
+  @@index([groupId])
+  @@index([lastName, firstName])
+  @@unique([groupId, lastName, firstName, middleName])
+}
+
+model AssessmentSession {
+  id            String              @id @default(cuid())
+  participantId String
+  groupId       String
+  status        SessionStatus       @default(IN_PROGRESS)
+  submittedAt   DateTime?
+  meta          Json?
+  createdAt     DateTime            @default(now())
+  updatedAt     DateTime            @updatedAt
+
+  participant   Participant         @relation(fields: [participantId], references: [id])
+  group         StudyGroup          @relation(fields: [groupId], references: [id])
+  responses     Response[]
+  scores        ScoreSnapshot[]
+
+  @@index([participantId])
+  @@index([groupId])
+  @@index([status])
+  @@index([submittedAt])
+}
+
+model Response {
+  id          String              @id @default(cuid())
+  sessionId   String
+  instrument  InstrumentKind
+  questionKey String
+  answer      Json
+
+  session     AssessmentSession   @relation(fields: [sessionId], references: [id], onDelete: Cascade)
+
+  @@index([sessionId])
+  @@index([instrument])
+  @@unique([sessionId, instrument, questionKey])
+}
+
+model ScoreSnapshot {
+  id             String              @id @default(cuid())
+  sessionId      String
+  instrument     InstrumentKind
+  scores         Json
+  interpretation Json?
+  createdAt      DateTime            @default(now())
+  updatedAt      DateTime            @updatedAt
+
+  session        AssessmentSession   @relation(fields: [sessionId], references: [id], onDelete: Cascade)
+
+  @@index([sessionId])
+  @@index([instrument])
+  @@unique([sessionId, instrument])
+}
+
+model QuestionBank {
+  id        String              @id @default(cuid())
+  instrument InstrumentKind
+  key       String              @unique
+  text      String
+  meta      Json?
+  isActive  Boolean             @default(true)
+  createdAt DateTime            @default(now())
+  updatedAt DateTime            @updatedAt
+
+  @@index([instrument])
+  @@index([isActive])
+}
+
+enum InstrumentKind {
+  SOCIAL_ANXIETY
+  LIEBOWITZ_MODIFIED
+  AUTHOR_SOCIAL_FEARS
+}
+
+enum SessionStatus {
+  IN_PROGRESS
+  COMPLETED
+}
