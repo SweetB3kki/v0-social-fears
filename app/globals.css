@@ -105,32 +105,12 @@
       radial-gradient(circle at top left, rgba(249, 115, 22, 0.22), transparent 28%),
       radial-gradient(circle at top right, rgba(251, 113, 133, 0.18), transparent 32%),
       linear-gradient(180deg, #fff7ed 0%, #fff2df 38%, #fffaf5 100%);
+    background-attachment: fixed;
   }
 }
 
-.sunset-blob {
-  position: absolute;
-  border-radius: 9999px;
-  filter: blur(90px);
-  opacity: 0.45;
-  pointer-events: none;
-  z-index: 0;
-}
-
-.sunset-blob-orange {
-  background: rgba(249, 115, 22, 0.44);
-}
-
-.sunset-blob-rose {
-  background: rgba(251, 113, 133, 0.3);
-}
-
-.sunset-blob-plum {
-  background: rgba(124, 58, 237, 0.2);
-}
-
 .sunset-shadow {
-  box-shadow: 0 12px 45px -18px rgba(124, 58, 237, 0.18), 0 18px 40px -22px rgba(249, 115, 22, 0.35);
+  box-shadow: 0 10px 30px -18px rgba(124, 58, 237, 0.1), 0 18px 30px -24px rgba(249, 115, 22, 0.2);
 }
 
 .gradient-btn {
@@ -142,6 +122,5 @@
 }
 
 .glass-card {
-  background: rgba(255, 255, 255, 0.72);
-  backdrop-filter: blur(16px);
+  background: rgba(255, 255, 255, 0.94);
 }

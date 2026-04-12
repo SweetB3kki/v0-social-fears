@@ -23,7 +23,7 @@ export function HeaderNav() {
   const pathname = usePathname();
 
   return (
-    <header className="sticky top-0 z-50 border-b border-white/40 bg-white/55 backdrop-blur-xl">
+    <header className="sticky top-0 z-50 border-b border-white/50 bg-[rgba(255,250,245,0.96)]">
       <div className="mx-auto flex h-16 max-w-[1200px] items-center justify-between px-4 sm:px-6">
         <Link href="/" className="flex items-center gap-3">
           <div className="gradient-btn flex h-10 w-10 items-center justify-center rounded-2xl text-white shadow-lg shadow-orange-400/20">

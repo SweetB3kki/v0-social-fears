@@ -213,6 +213,16 @@ export default function ParticipantTestPage({ params }: ParticipantPageProps) {
     return false;
   }
 
+  function scrollToTopOfTest() {
+    window.scrollTo({ top: 0, behavior: "smooth" });
+  }
+
+  function goToStep(nextStepIndex: number) {
+    setStepIndex(nextStepIndex);
+    setFormError(null);
+    window.setTimeout(scrollToTopOfTest, 0);
+  }
+
   async function handleSubmit() {
     if (!participant) return;
 
@@ -474,8 +484,7 @@ export default function ParticipantTestPage({ params }: ParticipantPageProps) {
                 className="rounded-2xl border-white/60 bg-white/60 px-6 py-6 text-[var(--ink)]"
                 disabled={stepIndex === 0}
                 onClick={() => {
-                  setFormError(null);
-                  setStepIndex((current) => Math.max(0, current - 1));
+                  goToStep(Math.max(0, stepIndex - 1));
                 }}
               >
                 Назад
@@ -489,7 +498,7 @@ export default function ParticipantTestPage({ params }: ParticipantPageProps) {
                     if (!validateStep(stepKey, { showMessage: true })) {
                       return;
                     }
-                    setStepIndex((current) => Math.min(steps.length - 1, current + 1));
+                    goToStep(Math.min(steps.length - 1, stepIndex + 1));
                   }}
                 >
                   Далее
