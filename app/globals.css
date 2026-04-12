@@ -110,7 +110,7 @@
 }
 
 .sunset-shadow {
-  box-shadow: 0 10px 30px -18px rgba(124, 58, 237, 0.1), 0 18px 30px -24px rgba(249, 115, 22, 0.2);
+  box-shadow: 0 12px 32px -20px rgba(124, 58, 237, 0.12), 0 18px 36px -24px rgba(249, 115, 22, 0.24);
 }
 
 .gradient-btn {
@@ -122,5 +122,8 @@
 }
 
 .glass-card {
-  background: rgba(255, 255, 255, 0.94);
+  background: linear-gradient(180deg, rgba(255, 255, 255, 0.86) 0%, rgba(255, 250, 245, 0.8) 100%);
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+  border: 1px solid rgba(255, 255, 255, 0.72);
 }
