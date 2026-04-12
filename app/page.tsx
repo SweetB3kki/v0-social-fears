@@ -8,7 +8,7 @@ export default function HomePage() {
   return (
     <AppShell>
       <div className="mx-auto max-w-[1180px] px-6 py-14 md:py-20">
-        <section className="grid gap-10 lg:grid-cols-[1.15fr_0.85fr] lg:items-center">
+        <section className="grid gap-10 lg:grid-cols-[1.15fr_0.85fr] lg:items-start">
           <div>
             <div className="mb-5 inline-flex items-center gap-2 rounded-full border border-white/60 bg-white/70 px-4 py-2 text-sm text-[var(--ink-secondary)] backdrop-blur">
               <ShieldAlert className="h-4 w-4 text-[var(--sunset-rose)]" />
@@ -40,7 +40,7 @@ export default function HomePage() {
             </div>
           </div>
 
-          <Card className="glass-card sunset-shadow border-0">
+          <Card className="glass-card sunset-shadow border-0 lg:mt-1 lg:self-start">
             <CardContent className="space-y-5 p-7">
               <div className="rounded-3xl bg-gradient-to-br from-orange-500 via-rose-400 to-violet-600 p-1.5">
                 <div className="rounded-[1.35rem] bg-[rgba(255,247,237,0.92)] p-5">
